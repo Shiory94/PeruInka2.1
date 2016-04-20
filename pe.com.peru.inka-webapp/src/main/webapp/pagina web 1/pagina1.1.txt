@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Huellitas </title>
+<body background="D:\pagina web\PERROSYGATOS.jpg">
+<body>
+<h2 align=center> <marquee> <font face="Monotype Corsiva" color=fuchsia size=1>Hola Bienvenido! Esta es tu veterinaria favorita "Mordiditas Con Amor"</font></marquee> </h2>
+</body>
+<h2 align=Right>Ven a tu veterinaria favorita "Huellitas"</h2>
+<h2>Aca le brindaremos una descuentos sobre descuentos
+</h2>
+<h2>Ofrecemos:
+Bañamos a tu mascota
+vacunamos a tu mascota
+</h2>
+</body>
+</head>
+</html>

@@ -1,0 +1,82 @@
+package pe.com.peru.inka.webapp.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import pe.com.peru.inka.service.services.PeruInkaService;
+import pe.com.peru.inka.service.util.Cliente;
+
+@Controller
+public class DashboardController {
+
+	@Autowired
+	private PeruInkaService peruInkaService;
+
+	@RequestMapping(value = "home/dashboard", method = RequestMethod.GET)
+	public String dashboardDashboard(Model model, HttpServletRequest request) {
+		model.addAttribute("listCliente", peruInkaService.findAllCliente());
+		return "home/dashboard";
+	}
+
+	@RequestMapping(value = "home/frmCliente", method = RequestMethod.GET)
+	public String frmCliente(Model model, HttpServletRequest request) {
+		model.addAttribute("cliente", new Cliente());
+		model.addAttribute("opc", "new");
+		return "home/frmCliente";
+	}
+
+	@RequestMapping(value = "home/saveCliente", method = RequestMethod.POST)
+	public String saveCliente(Model model, HttpServletRequest request, @ModelAttribute("cliente") Cliente cliente) {
+		// String id = request.getParameter("id");
+		// String name = request.getParameter("name");
+		// String lastNameP = request.getParameter("lastNameP");
+		String opc = request.getParameter("opc");
+		if (opc.equals("new")) {
+			peruInkaService.saveCliente(cliente);
+		} else {
+			peruInkaService.updateCliente(cliente);
+		}
+
+		return "redirect:dashboard";
+	}
+
+	@RequestMapping(value = "home/deleteCliente", method = RequestMethod.GET)
+	public String deleteCliente(Model model, HttpServletRequest request, @RequestParam("id_") Long id) {
+		peruInkaService.deleteCliente(id);
+		return "redirect:dashboard";
+	}
+
+	@RequestMapping(value = "home/editCliente", method = RequestMethod.GET)
+	public String editCliente(Model model, HttpServletRequest request, @RequestParam("id_") Long id) {
+		model.addAttribute("cliente", peruInkaService.searchCliente(id));
+		model.addAttribute("opc", "update");
+		return "home/frmCliente";
+	}
+
+	// @RequestMapping(value = "/home/searchJsonById/{id}", method =
+	// RequestMethod.GET, headers = "Accept=application/json")
+	// public @ResponseBody String searchJsonById(@PathVariable("id") Long id) {
+	//
+	//
+	// Cliente cliente = new Cliente();
+	// cliente.setName("Juan");
+	// list.add(cliente);
+	//
+	// return "Return value::: " + id;
+	// }
+	//
+	// @RequestMapping(value = "/home/searchXMLById/{id}", method =
+	// RequestMethod.GET, headers = "Accept=application/xml")
+	// public @ResponseBody String searchXMLById(@PathVariable("id") Long id) {
+	//
+	// return "Return value::: " + id;
+	// }
+	//
+}

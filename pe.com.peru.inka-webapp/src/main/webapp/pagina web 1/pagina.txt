@@ -1,0 +1,13 @@
+<html>
+<head>
+<title>Huellitas </title>
+
+<body background="D:\pagina web\gatos-perros.jpg">
+<body text="#125643">Hola! Bienvenido
+
+</body>
+
+
+</body>
+</head>
+</html>
